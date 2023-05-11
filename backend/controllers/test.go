@@ -5,16 +5,10 @@ import (
 	"net/http"
 
 	"github.com/andres123dbh/parcial_final_backend/configuration"
+	"github.com/andres123dbh/parcial_final_backend/interfaces"
 	"github.com/gin-gonic/gin"
 	_ "github.com/go-sql-driver/mysql"
-	//"github.com/andres123dbh/parcial_final_backend/interfaces"
 )
-
-type UserI struct {
-	ID       int    `json:"id"`
-	Username string `json:"email"`
-	Password string `json:"contrasenna"`
-}
 
 func Test(c *gin.Context) {
 	database, err := configuration.GetDatabase()
@@ -33,7 +27,7 @@ func Test(c *gin.Context) {
 	}
 
 	for results.Next() {
-		var user UserI
+		var user interfaces.UserITest
 		err = results.Scan(&user.ID, &user.Username, &user.Password)
 		if err != nil {
 			panic(err.Error())

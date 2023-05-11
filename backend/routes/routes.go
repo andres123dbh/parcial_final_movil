@@ -9,4 +9,7 @@ import (
 func SetupRoutes(engine *gin.Engine) {
 	// Test
 	engine.GET("/test", controllers.Test)
+
+	//Session
+	engine.POST("/signup", controllers.Signup)
 }
