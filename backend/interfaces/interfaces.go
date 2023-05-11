@@ -26,3 +26,11 @@ type RequestSignup struct {
 	UUID      string `json:"uuid"`
 	Token_FMC string `json:"token_FMC"`
 }
+
+type RequestLogIn struct {
+	Email     string `json:"email"`
+	Password  string `json:"password"`
+	Model     string `json:"model"`
+	UUID      string `json:"uuid"`
+	Token_FMC string `json:"token_FMC"`
+}

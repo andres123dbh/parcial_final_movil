@@ -12,4 +12,5 @@ func SetupRoutes(engine *gin.Engine) {
 
 	//Session
 	engine.POST("/signup", controllers.Signup)
+	engine.POST("/login", controllers.Login)
 }
