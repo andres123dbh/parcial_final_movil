@@ -13,13 +13,13 @@
             android:hardwareAccelerated="true"
             android:windowSoftInputMode="adjustResize">
             <!-- Specifies an Android theme to apply to this Activity as soon as
-                 the Android process has started. This theme is visible to the user
-                 while the Flutter UI initializes. After that, this theme continues
-                 to determine the Window background behind the Flutter UI. -->
+                the Android process has started. This theme is visible to the user
+                while the Flutter UI initializes. After that, this theme continues
+                to determine the Window background behind the Flutter UI. -->
             <meta-data
               android:name="io.flutter.embedding.android.NormalTheme"
               android:resource="@style/NormalTheme"
-              />
+            />
             <intent-filter>
                 <action android:name="android.intent.action.MAIN"/>
                 <category android:name="android.intent.category.LAUNCHER"/>
@@ -31,4 +31,17 @@
             android:name="flutterEmbedding"
             android:value="2" />
     </application>
+
+    <!-- Required permissions for Firebase Cloud Messaging -->
+    <uses-permission android:name="android.permission.INTERNET" />
+    <uses-permission android:name="android.permission.WAKE_LOCK" />
+
+    <!-- Optional permission for displaying notifications in the background -->
+    <uses-permission android:name="android.permission.VIBRATE" />
+
+    <!-- Required for receiving FCM messages -->
+    <permission android:name="com.example.firebase.permission.C2D_MESSAGE"
+                android:protectionLevel="signature" />
+    <uses-permission android:name="com.example.firebase.permission.C2D_MESSAGE" />
+
 </manifest>

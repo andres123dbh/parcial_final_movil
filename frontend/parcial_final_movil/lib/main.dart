@@ -1,7 +1,22 @@
 import 'package:flutter/material.dart';
+import 'package:firebase_core/firebase_core.dart';
+import 'package:firebase_messaging/firebase_messaging.dart';
 
-void main() {
+void main() async {
+  WidgetsFlutterBinding.ensureInitialized();
+  await Firebase.initializeApp();
+  FirebaseMessaging.onBackgroundMessage(_manejoMensajeEnSegundoPlano);
+  FirebaseMessaging messaging = FirebaseMessaging.instance;
+  messaging.getToken().then((value) {
+    // ignore: avoid_print
+    print("FirebaseMessaging token: $value");
+  });
   runApp(const MyApp());
+}
+
+Future<void> _manejoMensajeEnSegundoPlano(RemoteMessage mensaje) async {
+  // ignore: avoid_print
+  print("Mensaje: ${mensaje.messageId}");
 }
 
 class MyApp extends StatelessWidget {
