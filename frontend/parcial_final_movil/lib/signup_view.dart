@@ -8,6 +8,8 @@ import 'package:dropdown_button2/dropdown_button2.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:get/get.dart';
 import 'package:device_info_plus/device_info_plus.dart';
+import 'package:flutter_dotenv/flutter_dotenv.dart';
+
 
 
 String? tokenFmc;
@@ -94,7 +96,7 @@ class _DashboardState extends State<Dashboard> {
   Future signUp() async {
     SharedPreferences prefs = await SharedPreferences.getInstance();
     
-    const url = 'http://192.168.1.14:8080/signup';
+    var url = '${dotenv.env['URL']}/signup';
     tokenFmc = prefs.getString("token_fmc"); 
     List<String> informationCellphone = await getPhoneInformation();
     Uint8List imagebytes = await imageFile!.readAsBytes(); 
