@@ -35,8 +35,20 @@ type RequestLogIn struct {
 	Token_FMC string `json:"token_FMC"`
 }
 
+type RequestInformation struct {
+	Email string `json:"email"`
+}
+
 type ResponseUsers struct {
 	Email string `json:"email"`
 	Photo string `json:"foto"`
 	Name  string `json:"nombre_completo"`
+}
+
+type ResponseUser struct {
+	Email     string `json:"email"`
+	Photo     string `json:"foto"`
+	Name      string `json:"nombre_completo"`
+	Cellphone int    `json:"celular"`
+	Position  string `json:"cargo"`
 }
