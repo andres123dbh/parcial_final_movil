@@ -31,9 +31,9 @@ class HomeUser extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
 
-  removeValues() async {
-      //SharedPreferences prefs = await SharedPreferences.getInstance();
-      //prefs.remove("token");
+  logOut() async {
+      SharedPreferences prefs = await SharedPreferences.getInstance();
+      prefs.remove("token");
       // ignore: use_build_context_synchronously
       Navigator.pushReplacement(context, MaterialPageRoute(builder: (context) => const MyHomePage(title: "demo")));
   }
@@ -46,7 +46,7 @@ class HomeUser extends StatelessWidget {
               const Text('Hello user',style: TextStyle(fontSize: 24.0)),
               ElevatedButton(
                   onPressed: () {
-                    removeValues();
+                    logOut();
                   }, 
                   style: ElevatedButton.styleFrom(
                     shape: RoundedRectangleBorder(
