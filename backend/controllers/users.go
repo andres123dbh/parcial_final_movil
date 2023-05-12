@@ -47,7 +47,7 @@ func Get_users(c *gin.Context) {
 
 	c.JSON(http.StatusOK, gin.H{
 		"error":   http.StatusOK,
-		"message": "Logged in successfully",
+		"message": "Get users",
 		"users":   users,
 	})
 }
