@@ -79,7 +79,7 @@ class _MyHomePageState extends State<MyHomePage> {
                       shape: RoundedRectangleBorder(
                       borderRadius: BorderRadius.circular(50))
               ),
-              child: const Text("Sign Up")
+              child: const Text("Sign Up",style: TextStyle(fontSize: 20))
             ),
             const SizedBox(height: 20),
             ElevatedButton(
@@ -91,7 +91,7 @@ class _MyHomePageState extends State<MyHomePage> {
                       shape: RoundedRectangleBorder(
                       borderRadius: BorderRadius.circular(50))
               ),
-              child: const Text("Log In")
+              child: const Text("Log In",style: TextStyle(fontSize: 20))
             ),
           ],
         ),
