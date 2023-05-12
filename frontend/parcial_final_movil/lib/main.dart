@@ -6,6 +6,7 @@ import 'package:shared_preferences/shared_preferences.dart';
 import 'package:flutter_dotenv/flutter_dotenv.dart';
 
 import './signup_view.dart';
+import './login_view.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
@@ -58,7 +59,7 @@ class _MyHomePageState extends State<MyHomePage> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text(widget.title),
+        title: const Text("Parcial Final"),
       ),
       body: Center(
         child: Column(
@@ -83,8 +84,7 @@ class _MyHomePageState extends State<MyHomePage> {
             const SizedBox(height: 20),
             ElevatedButton(
               onPressed: (() {
-                //Navigator.push(context, MaterialPageRoute(builder: (context) => const Page2()));
-                print("Log In");
+                Get.to(() => const LoginView());
               }), 
               style: ElevatedButton.styleFrom(
                       fixedSize: Size(MediaQuery.of(context).size.width*0.8, 50),

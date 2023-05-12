@@ -10,7 +10,7 @@ import 'package:get/get.dart';
 import 'package:device_info_plus/device_info_plus.dart';
 import 'package:flutter_dotenv/flutter_dotenv.dart';
 
-
+import './home.dart';
 
 String? tokenFmc;
 
@@ -119,14 +119,36 @@ class _DashboardState extends State<Dashboard> {
         
     if (response.statusCode == 200) {
       // ignore: use_build_context_synchronously
-      //Navigator.pushReplacement(context, MaterialPageRoute(builder: (context) => const HomePage()));
+      logIn(emailControllerText.text, passwordControllerText.text);
     }else{
       // ignore: avoid_print
       print(responseBody['message']);
     }
+  }
 
-    
-      
+  Future logIn(email,password) async {
+    SharedPreferences prefs = await SharedPreferences.getInstance();
+    var url = '${dotenv.env['URL']}/login';
+    tokenFmc = prefs.getString("token_fmc"); 
+    List<String> informationCellphone = await getPhoneInformation();
+
+
+    var response = await http.post(Uri.parse(url),
+        body: jsonEncode({
+          "email": email,
+          "password": password,
+          "model": informationCellphone[0],
+          "uuid": informationCellphone[1],
+          "token_FMC": tokenFmc,
+        }));
+
+    var responseBody = json.decode(response.body);
+
+    if (response.statusCode == 200) {
+      prefs.setString('token', responseBody['token']);
+      // ignore: use_build_context_synchronously
+      Get.to(() => const HomePage());
+    }
   }
 
   @override
