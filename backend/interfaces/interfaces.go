@@ -34,3 +34,9 @@ type RequestLogIn struct {
 	UUID      string `json:"uuid"`
 	Token_FMC string `json:"token_FMC"`
 }
+
+type ResponseUsers struct {
+	Email string `json:"email"`
+	Photo string `json:"foto"`
+	Name  string `json:"nombre_completo"`
+}

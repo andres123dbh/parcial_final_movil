@@ -2,7 +2,7 @@ package routes
 
 import (
 	"github.com/andres123dbh/parcial_final_backend/controllers"
-	//"github.com/andres123dbh/parcial_final_backend/middlewares"
+	"github.com/andres123dbh/parcial_final_backend/middlewares"
 	"github.com/gin-gonic/gin"
 )
 
@@ -13,4 +13,7 @@ func SetupRoutes(engine *gin.Engine) {
 	//Session
 	engine.POST("/signup", controllers.Signup)
 	engine.POST("/login", controllers.Login)
+
+	//Users
+	engine.GET("/users", middlewares.ProvideAccessToken(), controllers.Get_users)
 }
