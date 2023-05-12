@@ -96,6 +96,6 @@ func Information(c *gin.Context) {
 	c.JSON(http.StatusOK, gin.H{
 		"error":   false,
 		"message": "Get infomation",
-		"users":   user,
+		"user":    user,
 	})
 }
