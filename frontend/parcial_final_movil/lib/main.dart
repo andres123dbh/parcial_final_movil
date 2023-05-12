@@ -7,6 +7,9 @@ import 'package:flutter_dotenv/flutter_dotenv.dart';
 
 import './signup_view.dart';
 import './login_view.dart';
+import './home.dart';
+
+String? token;
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
@@ -20,7 +23,7 @@ void main() async {
     print("FirebaseMessaging token: $value");
     prefs.setString('token_fmc', value!);
   });
-  
+  token = await prefs.getString("token");  
   runApp(const GetMaterialApp(home: MyApp()));
 }
 
@@ -39,7 +42,11 @@ class MyApp extends StatelessWidget {
       theme: ThemeData(
         primarySwatch: Colors.blue,
       ),
-      home: const MyHomePage(title: 'Home Page'),
+      initialRoute: token == null ? "/main" : "/home",
+      routes: {
+        '/login': (context) => const MyHomePage(title: 'Home Page'),
+        "/home": (context) => const HomePage(),
+      },
     );
   }
 }
