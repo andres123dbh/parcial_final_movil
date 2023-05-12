@@ -183,7 +183,7 @@ func Whoiam(c *gin.Context) {
 	}
 
 	c.JSON(http.StatusOK, gin.H{
-		"error":   http.StatusOK,
+		"error":   false,
 		"message": "Get user email",
 		"email":   email,
 	})

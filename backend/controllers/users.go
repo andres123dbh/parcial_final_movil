@@ -11,6 +11,16 @@ import (
 )
 
 func Get_users(c *gin.Context) {
+	email, _ := c.Get("email")
+
+	if email == "" {
+		c.JSON(http.StatusInternalServerError, gin.H{
+			"error":   true,
+			"message": "Error getting email",
+		})
+		return
+	}
+
 	database, err := configuration.GetDatabase()
 	var users []interfaces.ResponseUsers
 
@@ -22,7 +32,7 @@ func Get_users(c *gin.Context) {
 		return
 	}
 
-	results, err := database.Query("SELECT email, nombre_completo, foto FROM users")
+	results, err := database.Query("SELECT email, nombre_completo, foto FROM users WHERE email != ?", email)
 
 	if err != nil {
 		c.JSON(http.StatusInternalServerError, gin.H{

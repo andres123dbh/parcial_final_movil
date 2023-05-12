@@ -52,3 +52,10 @@ type ResponseUser struct {
 	Cellphone int    `json:"celular"`
 	Position  string `json:"cargo"`
 }
+
+type RequestSendMessage struct {
+	SenderEmail    string `json:"senderEmail"`
+	RecipientEmail string `json:"recipientEmail"`
+	Title          string `json:"title"`
+	Message        string `json:"message"`
+}
