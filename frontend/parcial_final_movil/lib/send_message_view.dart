@@ -43,13 +43,17 @@ class _DashboardState extends State<Dashboard> {
 
   String senderEmail = "";
 
-  Future login() async {
-    var url = '${dotenv.env['URL']}/login';
+  Future sendMessage() async {
+    SharedPreferences prefs = await SharedPreferences.getInstance();
+    String? token = prefs.getString("token");
+    var url = '${dotenv.env['URL']}/send';
 
-    var response = await http.post(Uri.parse(url),
+    var response = await http.post(Uri.parse(url), headers: {"accessToken": token!},
         body: jsonEncode({
-          "email": titleControllerText.text,
-          "password": messageControllerText.text,
+          "senderEmail": senderEmail,
+          "recipientEmail": widget.recipientEmail,
+          "title": titleControllerText.text,
+          "message": messageControllerText.text,
         }));
 
     var responseBody = json.decode(response.body);
@@ -57,6 +61,8 @@ class _DashboardState extends State<Dashboard> {
     if (response.statusCode == 200) {
       // ignore: use_build_context_synchronously
       Get.to(() => const HomePage());
+    }else{
+      print(responseBody['message']);
     }
   }
 
@@ -64,7 +70,6 @@ class _DashboardState extends State<Dashboard> {
     SharedPreferences prefs = await SharedPreferences.getInstance();
     String? token = prefs.getString("token");
     var url = '${dotenv.env['URL']}/whoiam';
-
 
     final response = await http.get(Uri.parse(url), headers: {"accessToken": token!});
     dynamic responseData = jsonDecode(utf8.decode(response.bodyBytes));
@@ -129,7 +134,7 @@ class _DashboardState extends State<Dashboard> {
                 const SizedBox(height: 10),
                 ElevatedButton(
                   onPressed: () {
-                    login();
+                    sendMessage();
                   }, 
                   style: ElevatedButton.styleFrom(
                     fixedSize: const Size(50, 50),

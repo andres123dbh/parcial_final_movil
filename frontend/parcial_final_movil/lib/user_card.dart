@@ -35,7 +35,7 @@ class UserCard{
                 crossAxisAlignment: CrossAxisAlignment.start,
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: [
-                  Center(child: Image.memory(photo, width: 90, height: 80))
+                  Center(child: Image.memory(photo, width: 90, height: 70))
                 ],
               ),
               const SizedBox(width: 20),
