@@ -150,14 +150,14 @@ func Login(c *gin.Context) {
 
 		if err != nil {
 			c.JSON(http.StatusInternalServerError, gin.H{
-				"error":   false,
+				"error":   true,
 				"message": err,
 			})
 			return
 		}
 
 		c.JSON(http.StatusOK, gin.H{
-			"error":   http.StatusOK,
+			"error":   false,
 			"message": "Logged in successfully",
 			"token":   token,
 		})
@@ -169,4 +169,22 @@ func Login(c *gin.Context) {
 		})
 		return
 	}
+}
+
+func Whoiam(c *gin.Context) {
+	email, _ := c.Get("email")
+
+	if email == "" {
+		c.JSON(http.StatusInternalServerError, gin.H{
+			"error":   true,
+			"message": "Error getting email",
+		})
+		return
+	}
+
+	c.JSON(http.StatusOK, gin.H{
+		"error":   http.StatusOK,
+		"message": "Get user email",
+		"email":   email,
+	})
 }
