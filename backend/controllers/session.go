@@ -34,6 +34,7 @@ func Signup(c *gin.Context) {
 	_, err = database.Query("CALL signup(?,?,?,?,?,?)", userI.Email, userI.Password, userI.Photo, userI.Name, userI.Cellphone, userI.Position)
 
 	if err != nil {
+
 		c.JSON(http.StatusInternalServerError, gin.H{
 			"error":   true,
 			"message": err,
@@ -44,6 +45,17 @@ func Signup(c *gin.Context) {
 	_, err = database.Query(" CALL insert_token(?,?,?,?)", userI.Email, userI.UUID, userI.Model, userI.Token_FMC)
 
 	if err != nil {
+
+		_, errInt := database.Query("CALL delete_user(?)", userI.Email)
+
+		if errInt != nil {
+			c.JSON(http.StatusInternalServerError, gin.H{
+				"errorr":  true,
+				"message": err,
+			})
+			return
+		}
+
 		c.JSON(http.StatusInternalServerError, gin.H{
 			"error":   true,
 			"message": err,

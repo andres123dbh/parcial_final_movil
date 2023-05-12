@@ -104,6 +104,12 @@ CREATE PROCEDURE save_sent_message
   	VALUES (tituloI, cuerpoI,email_remitenteI,email_destinatarioI,tokens_destinatarioI,resultadoI);
  END;
  
+ CREATE PROCEDURE delete_user 
+	(IN  emailI VARCHAR(70))
+ BEGIN
+  DELETE FROM users WHERE email = emailI;
+ END;
+ 
 //
 
 
