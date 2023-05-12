@@ -7,6 +7,7 @@ import 'package:shared_preferences/shared_preferences.dart';
 import 'package:flutter_dotenv/flutter_dotenv.dart';
 import 'package:device_info_plus/device_info_plus.dart';
 import 'package:get/get.dart';
+import 'package:another_flushbar/flushbar.dart';
 
 import './home.dart';
 
@@ -79,7 +80,30 @@ class _DashboardState extends State<Dashboard> {
     if (response.statusCode == 200) {
       prefs.setString('token', responseBody['token']);
       // ignore: use_build_context_synchronously
-      Get.to(() => const HomePage());
+      Flushbar(
+        title: "Log In",
+        message: "Log In Satisfactorily",
+        duration: const Duration(seconds: 3),
+        margin: const EdgeInsets.all(8),
+        flushbarPosition: FlushbarPosition.TOP,
+        backgroundColor: Colors.green,
+        borderRadius: BorderRadius.circular(8),
+      ).show(context);
+      // ignore: use_build_context_synchronously
+      Future.delayed(const Duration(seconds: 1), () {
+        Get.to(() => const HomePage());
+      });
+    }else{
+      // ignore: use_build_context_synchronously
+      Flushbar(
+        title: "Error",
+        message: "An error occurred when Log In",
+        duration: const Duration(seconds: 3),
+        margin: const EdgeInsets.all(8),
+        flushbarPosition: FlushbarPosition.TOP,
+        backgroundColor: Colors.red,
+        borderRadius: BorderRadius.circular(8),
+      ).show(context);
     }
   }
 

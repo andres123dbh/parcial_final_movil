@@ -112,13 +112,13 @@ CREATE PROCEDURE save_sent_message
 
 -- CALL insert_token('andres@gmail', '1414','samsung','iVBORw0KGgoAAAANSUhEUgAAAfQAAAJPCAYAAACKMyahAAAAAXNSR0IArs4c6QA');
 
--- CALL insert_token('andres@gmail', '1415','samsung','isVBORw0KGgoAAAANSUhEUgAAAfQAAAJPCAYAAACKMyahAAAAAXNSR0IArs4c6QA');
+-- CALL insert_token('david@gmail.com', '1415','samsung','isVBORw0KGgoAAAANSUhEUgAAAfQAAAJPCAYAAACKMyahAAAAAXNSR0IArs4c6QA');
 
 -- SELECT login('andres@gmail','1234');
 
 -- SELECT get_token_user('andres@gmail','1414','samsung');
 
--- SELECT get_all_tokens_user('andres@gmail');
+-- SELECT get_all_tokens_user('david@gmail.com');
 
 -- CALL change_token_user('andres@gmail','1414','samsung','iVBORw0KGgoAAAANSUhEUgAAAfQAAAJPCAYAAACKMyahAAAAAXNSR0IArs4c6QB');
 

@@ -1,14 +1,16 @@
 import 'dart:io';
+import 'dart:convert';
 import 'dart:typed_data';
+
 import 'package:flutter/material.dart';
 import 'package:http/http.dart' as http;
-import 'dart:convert';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:dropdown_button2/dropdown_button2.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:get/get.dart';
 import 'package:device_info_plus/device_info_plus.dart';
 import 'package:flutter_dotenv/flutter_dotenv.dart';
+import 'package:another_flushbar/flushbar.dart';
 
 import './home.dart';
 
@@ -119,10 +121,30 @@ class _DashboardState extends State<Dashboard> {
         
     if (response.statusCode == 200) {
       // ignore: use_build_context_synchronously
-      logIn(emailControllerText.text, passwordControllerText.text);
+      Flushbar(
+        title: "Sign Up",
+        message: "Sign Up Satisfactorily",
+        duration: const Duration(seconds: 3),
+        margin: const EdgeInsets.all(8),
+        flushbarPosition: FlushbarPosition.TOP,
+        backgroundColor: Colors.green,
+        borderRadius: BorderRadius.circular(8),
+      ).show(context);
+      // ignore: use_build_context_synchronously
+      Future.delayed(const Duration(seconds: 1), () {
+        logIn(emailControllerText.text, passwordControllerText.text);
+      });
     }else{
-      // ignore: avoid_print
-      print(responseBody['message']);
+      // ignore: use_build_context_synchronously
+      Flushbar(
+        title: "Error",
+        message: "An error occurred when Sign Up",
+        duration: const Duration(seconds: 3),
+        margin: const EdgeInsets.all(8),
+        flushbarPosition: FlushbarPosition.TOP,
+        backgroundColor: Colors.red,
+        borderRadius: BorderRadius.circular(8),
+      ).show(context);
     }
   }
 
