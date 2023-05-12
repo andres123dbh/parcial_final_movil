@@ -16,5 +16,5 @@ func SetupRoutes(engine *gin.Engine) {
 
 	//Users
 	engine.GET("/users", middlewares.ProvideAccessToken(), controllers.Get_users)
-	engine.GET("/information", middlewares.ProvideAccessToken(), controllers.Information)
+	engine.POST("/information", middlewares.ProvideAccessToken(), controllers.Information)
 }
