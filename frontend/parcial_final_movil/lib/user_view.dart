@@ -18,7 +18,9 @@ class UserView extends StatefulWidget {
 
 class _UserViewState extends State<UserView> {
 
-  dynamic user;
+  User user = User("","",0,"");
+
+  Widget image = Container();
 
   var url = '${dotenv.env['URL']}/information';
 
@@ -35,7 +37,8 @@ class _UserViewState extends State<UserView> {
 
 
     setState(() {
-      print(responseBody['user']);
+      image = Image.memory(const Base64Decoder().convert(responseBody['user']['foto']), width: 250, height: 150,fit: BoxFit.fill);
+      user = User(responseBody['user']['nombre_completo'], responseBody['user']['email'], responseBody['user']['celular'], responseBody['user']['cargo']);
     });
       
   }
@@ -61,7 +64,15 @@ class _UserViewState extends State<UserView> {
           child: Column(
             mainAxisAlignment: MainAxisAlignment.center,
             children: [
-              Text(widget.email),
+              Text(user.fullName,style: const TextStyle(fontSize: 28)),
+              const SizedBox(height: 10),
+              image,
+              const SizedBox(height: 10),
+              Text('Email: ${user.email}',style: const TextStyle(fontSize: 18)),
+              const SizedBox(height: 10),
+              Text('Cell Phone: ${user.cellphone}',style: const TextStyle(fontSize: 18)),
+              const SizedBox(height: 10),
+              Text('Position: ${user.position}',style: const TextStyle(fontSize: 18)),
               const SizedBox(height: 20),
               ElevatedButton(
                 onPressed: () {
@@ -95,3 +106,12 @@ class _UserViewState extends State<UserView> {
   
 }
 
+
+class User {
+  String fullName;
+  String email;
+  int cellphone;
+  String position;
+  
+  User(this.fullName,this.email,this.cellphone,this.position);
+}
