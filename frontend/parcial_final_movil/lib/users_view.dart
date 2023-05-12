@@ -55,7 +55,17 @@ class _ListUsersState extends State<ListUsers> {
         body: Column(
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
-            ListView.separated(
+            const Text('Users:',style: TextStyle(fontSize: 24.0)),
+            const SizedBox(height: 20),
+            userList.isEmpty ? Container(
+                  alignment: Alignment.center,
+                  child: Column(
+                    children: const [
+                      Text('No users yet',style: TextStyle(fontSize: 24.0)),
+                      SizedBox(height: 20),
+                    ],
+                  )
+            ): ListView.separated(
               scrollDirection: Axis.vertical,
               shrinkWrap: true,
               padding: const EdgeInsets.all(8),
@@ -66,6 +76,7 @@ class _ListUsersState extends State<ListUsers> {
               },
               separatorBuilder: (BuildContext context, int index) => const Divider(),
             ),
+            
             const SizedBox(height: 20),
             ElevatedButton(
                   onPressed: () {
