@@ -1,11 +1,12 @@
 import 'dart:convert';
-import 'dart:io';
 
 import 'package:http/http.dart' as http;
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:flutter_dotenv/flutter_dotenv.dart';
 import 'package:shared_preferences/shared_preferences.dart';
+
+import './send_message_view.dart';
 
 class UserView extends StatefulWidget {
   const UserView({Key? key, required this.email}) : super(key: key);
@@ -76,7 +77,7 @@ class _UserViewState extends State<UserView> {
               const SizedBox(height: 20),
               ElevatedButton(
                 onPressed: () {
-                  print("object");
+                  Get.to(() => SendMessageView(recipientEmail: user.email));
                 }, 
                 style: ElevatedButton.styleFrom(
                   fixedSize: Size(MediaQuery.of(context).size.width*0.8, 50),
