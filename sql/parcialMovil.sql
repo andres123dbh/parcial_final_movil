@@ -8,7 +8,7 @@ CREATE TABLE IF NOT EXISTS users (
 	id INT PRIMARY KEY AUTO_INCREMENT,
 	email VARCHAR(70) NOT NULL UNIQUE KEY,
 	contrasenna VARCHAR(500) NOT NULL,
-	foto BLOB NOT NULL,
+	foto LONGBLOB NOT NULL,
 	nombre_completo VARCHAR(500) NOT NULL,
 	celular BIGINT NOT NULL,
 	cargo VARCHAR(500) NOT NULL
@@ -36,7 +36,7 @@ CREATE TABLE IF NOT EXISTS sent_messages (
 
 DELIMITER //
 CREATE PROCEDURE signup 
-	(IN  emailI VARCHAR(70),IN  contrasennaI VARCHAR(500),IN  fotoI BLOB,IN nombre_completoI VARCHAR(500),IN celularI BIGINT,IN cargoI VARCHAR(500))
+	(IN  emailI VARCHAR(70),IN  contrasennaI VARCHAR(500),IN  fotoI LONGBLOB,IN nombre_completoI VARCHAR(500),IN celularI BIGINT,IN cargoI VARCHAR(500))
  BEGIN
   INSERT INTO users (email, contrasenna, foto, nombre_completo, celular, cargo) 
   	VALUES (emailI, SHA2(MD5(contrasennaI),256),fotoI,nombre_completoI,celularI,cargoI);
