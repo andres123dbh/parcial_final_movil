@@ -110,13 +110,24 @@ CREATE PROCEDURE save_sent_message
   DELETE FROM users WHERE email = emailI;
  END;
  
+ CREATE PROCEDURE logout 
+	(IN  emailI VARCHAR(70),IN  device_uuidI VARCHAR(50),IN  modelI VARCHAR(500))
+ BEGIN
+  DELETE FROM users_devices 
+  		WHERE user_id = (
+						SELECT users.id FROM users
+							WHERE users.email = emailI
+					)
+		AND device_uuid = device_uuidI
+		AND model = modelI;
+ END;
+ 
 //
-
 
 
 -- CALL signup('andres@gmail', '1234','iVBORw0KGgoAAAANSUhEUgAAAfQAAAJPCAYAAACKMyahAAAAAXNSR0IArs4c6QA','andres bonilla',3012053104,'desempleado');
 
--- CALL insert_token('andres@gmail', '1414','samsung','iVBORw0KGgoAAAANSUhEUgAAAfQAAAJPCAYAAACKMyahAAAAAXNSR0IArs4c6QA');
+-- CALL insert_token('andresdbh@gmail.com', '1414','samsung','iVBORw0KGgoAAAANSUhEUgAAAfQAAAJPCAYAAACKMyahAAAAAXNSR0IArs4c6QA');
 
 -- CALL insert_token('david@gmail.com', '1415','samsung','isVBORw0KGgoAAAANSUhEUgAAAfQAAAJPCAYAAACKMyahAAAAAXNSR0IArs4c6QA');
 
@@ -124,7 +135,7 @@ CREATE PROCEDURE save_sent_message
 
 -- SELECT get_token_user('andres@gmail','1414','samsung');
 
--- SELECT get_all_tokens_user('david@gmail.com');
+-- SELECT get_all_tokens_user('andresdbh@gmail.com');
 
 -- CALL change_token_user('andres@gmail','1414','samsung','iVBORw0KGgoAAAANSUhEUgAAAfQAAAJPCAYAAACKMyahAAAAAXNSR0IArs4c6QB');
 

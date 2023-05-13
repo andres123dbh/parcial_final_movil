@@ -59,3 +59,8 @@ type RequestSendMessage struct {
 	Title          string `json:"title"`
 	Message        string `json:"message"`
 }
+
+type RequestLogOut struct {
+	Model string `json:"model"`
+	UUID  string `json:"uuid"`
+}

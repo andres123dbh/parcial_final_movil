@@ -183,6 +183,7 @@ func Login(c *gin.Context) {
 	}
 }
 
+// Handle the request to get user email
 func Whoiam(c *gin.Context) {
 	email, _ := c.Get("email")
 
@@ -198,5 +199,50 @@ func Whoiam(c *gin.Context) {
 		"error":   false,
 		"message": "Get user email",
 		"email":   email,
+	})
+}
+
+// Handle the request to log out
+func Logout(c *gin.Context) {
+	var form interfaces.RequestLogOut
+
+	if err := c.ShouldBindJSON(&form); err != nil {
+		c.JSON(http.StatusBadRequest, "Invalid json")
+		return
+	}
+
+	email, _ := c.Get("email")
+
+	if email == "" {
+		c.JSON(http.StatusInternalServerError, gin.H{
+			"error":   true,
+			"message": "Error getting email",
+		})
+		return
+	}
+
+	database, err := configuration.GetDatabase()
+
+	if err != nil {
+		c.JSON(http.StatusInternalServerError, gin.H{
+			"error":   true,
+			"message": err,
+		})
+		return
+	}
+
+	_, err = database.Query("CALL logout(?,?,?)", email, form.UUID, form.Model)
+
+	if err != nil {
+		c.JSON(http.StatusInternalServerError, gin.H{
+			"error":   true,
+			"message": err,
+		})
+		return
+	}
+
+	c.JSON(http.StatusOK, gin.H{
+		"error":   false,
+		"message": "Log Out successfully",
 	})
 }

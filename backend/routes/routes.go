@@ -14,6 +14,7 @@ func SetupRoutes(engine *gin.Engine) {
 	engine.POST("/signup", controllers.Signup)
 	engine.POST("/login", controllers.Login)
 	engine.GET("/whoiam", middlewares.ProvideAccessToken(), controllers.Whoiam)
+	engine.POST("/logout", middlewares.ProvideAccessToken(), controllers.Logout)
 
 	//Message
 	engine.POST("/send", middlewares.ProvideAccessToken(), controllers.SendMessage)
