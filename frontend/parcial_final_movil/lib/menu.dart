@@ -34,6 +34,7 @@ class _MyHomePageState extends State<MyHomePage> {
     return Scaffold(
       appBar: AppBar(
         title: const Text("Parcial Final"),
+        automaticallyImplyLeading: false,
       ),
       body: Center(
         child: Column(
