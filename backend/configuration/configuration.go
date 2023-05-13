@@ -21,8 +21,9 @@ func GetDatabase() (*sql.DB, error) {
 	user := os.Getenv("USER")
 	password := os.Getenv("PASSWORD")
 	data := os.Getenv("DATABASE")
+	port := os.Getenv("PORT")
 
-	uri := user + ":" + password + "@tcp(localhost:3305)/" + data + "?parseTime=true"
+	uri := user + ":" + password + "@tcp(localhost:" + port + ")/" + data + "?parseTime=true"
 
 	database, err := sql.Open("mysql", uri)
 	if err != nil {
